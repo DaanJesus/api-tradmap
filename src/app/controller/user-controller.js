@@ -33,11 +33,16 @@ router.post('/register', async(req, res) => {
 
         const { name, email, password } = req.body
 
+        if (await User.findOne({ email }))
+            return res.status(400).send({ error: "Este email ja foi cadastrado!" })
+
         const user = await User.create({
             name,
             email,
             password
         })
+
+        user.password = undefined
 
         res.json({ message: 'Usuario cadastrado com sucesso.' })
 

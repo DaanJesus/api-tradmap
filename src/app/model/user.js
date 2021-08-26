@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
+const bcrypt = require('bcryptjs')
 
 const UserSchema = new mongoose.Schema({
 
@@ -9,14 +10,28 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        lowercase: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        selecet: false
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 
 });
+
+UserSchema.pre('save', async function(next) {
+    const hash = await bcrypt.hash(this.password, 10);
+    this.password = hash;
+
+    next();
+})
 
 const User = mongoose.model('User', UserSchema);
 
