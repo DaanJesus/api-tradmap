@@ -69,4 +69,4 @@ router.put('/set-favorite/:id_trade', async(req, res) => {
 
 });
 
-module.exports = app => app.use('/trade/v1/', router);
+module.exports = app => app.use('/trade/v1', router);
