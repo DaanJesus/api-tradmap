@@ -10,7 +10,7 @@
         }
     },
     "servers": [{
-            "url": "localhost:8080/trade/v1",
+            "url": "https://localhost:8080/trade/v1",
             "description": "API de testes"
         },
         {
@@ -121,6 +121,15 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/definitions/User"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "name": "adm",
+                                        "email": "adm@gmail.com",
+                                        "password": "123"
+                                    }
+                                }
                             }
                         }
                     }
