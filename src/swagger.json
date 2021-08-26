@@ -9,7 +9,7 @@
             "url": "https://opensource.org/licenses/MIT"
         }
     },
-    "host": "localhost:8080",
+    "host": "localhost:8080/trade",
     "basePath": "/",
     "tags": [{
         "name": "User",
@@ -96,15 +96,24 @@
             }
         },
         "/register": {
+            "parameters": [{
+                "in": "body",
+                "name": "body",
+                "schema": {
+                    "$ref": "#/definitions/User"
+                }
+            }],
             "post": {
                 "tags": [
                     "User"
                 ],
-                "description": "",
-                "parameters": [],
+                "summary": "Cadastra usuário",
                 "responses": {
-                    "400": {
-                        "description": "Bad Request"
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
                     }
                 }
             }
@@ -142,5 +151,57 @@
             }
         }
     },
-    "definitions": {}
+    "definitions": {
+        "User": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "required": true
+                },
+                "email": {
+                    "type": "string",
+                    "required": true
+                },
+                "password": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "Stocks": {
+            "properties": {
+                "stock": {
+                    "type": "string",
+                    "equired": true
+                },
+                "exchange": {
+                    "type": "string",
+                    "equired": true
+                },
+                "country": {
+                    "type": "string",
+                    "equired": true
+                },
+                "company": {
+                    "type": "string",
+                    "equired": true
+                },
+                "variation": {
+                    "type": "number",
+                    "equired": true
+                },
+                "price": {
+                    "type": "number",
+                    "equired": true
+                },
+                "favorito": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "chart": {
+                    "type": "array"
+                }
+            }
+        }
+    }
 }
