@@ -90,22 +90,37 @@
             }
         },
         "/login": {
-            "parameters": [{
-                "in": "body",
-                "name": "body"
-            }],
             "post": {
+                "summary": "Login de usuário",
                 "tags": [
                     "User"
                 ],
-                "description": "",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "Ok",
-                        "schema": {
-                            "$ref": "#/definitions/User"
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/User"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "email": "adm@gmail.com",
+                                        "password": "123"
+                                    }
+                                }
+                            }
                         }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "400": {
+                        "description": "Usuário não encontrado."
+                    },
+                    "200": {
+                        "description": "Usuário logado com sucesso."
                     }
                 }
             }
@@ -132,6 +147,17 @@
                                 }
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "400": {
+                        "description": "Email ja cadastrado."
+                    },
+                    "200": {
+                        "description": "Usuário cadastrado com sucesso."
                     }
                 }
             }
