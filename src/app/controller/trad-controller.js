@@ -5,7 +5,7 @@ const express = require('express');
 const Stocks = require('../model/stocks.js');
 const router = express.Router();
 
-router.get('/lista', async (req, res) => {
+router.get('/lista', async(req, res) => {
 
     try {
 
@@ -22,7 +22,7 @@ router.get('/lista', async (req, res) => {
 
 });
 
-router.get('/stocks-favoritos', async (req, res) => {
+router.get('/stocks-favoritos', async(req, res) => {
 
     try {
 
@@ -41,7 +41,7 @@ router.get('/stocks-favoritos', async (req, res) => {
 
 });
 
-router.put('/set-favorite/:id_trade', async (req, res) => {
+router.put('/set-favorite/:id_trade', async(req, res) => {
 
     try {
         const {
@@ -69,4 +69,4 @@ router.put('/set-favorite/:id_trade', async (req, res) => {
 
 });
 
-module.exports = app => app.use('/trade', router);
+module.exports = app => app.use('/trade/v1/', router);

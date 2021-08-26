@@ -82,6 +82,10 @@
             }
         },
         "/login": {
+            "parameters": [{
+                "in": "body",
+                "name": "body"
+            }],
             "post": {
                 "tags": [
                     "User"
@@ -89,8 +93,11 @@
                 "description": "",
                 "parameters": [],
                 "responses": {
-                    "400": {
-                        "description": "Bad Request"
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
                     }
                 }
             }

@@ -78,4 +78,4 @@ router.put('/update-user/:id_user', async(req, res) => {
 
 });
 
-module.exports = app => app.use('/trade', router);
+module.exports = app => app.use('/trade/v1', router);
