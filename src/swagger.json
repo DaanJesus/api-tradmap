@@ -10,9 +10,14 @@
         }
     },
     "servers": [{
-        "url": "https://api-tradmap.herokuapp.com/",
-        "description": "API de produção"
-    }],
+            "url": "http://localhost:8080/",
+            "description": "API de testes"
+        },
+        {
+            "url": "https://api-tradmap.herokuapp.com/",
+            "description": "API de produção"
+        }
+    ],
     "basePath": "/",
     "paths": {
         "/trade/v1/lista": {
@@ -294,6 +299,7 @@
         },
         "securitySchemes": {
             "bearerAuth": {
+                "type": "http",
                 "scheme": "bearer",
                 "bearerFormat": "JWT"
             }

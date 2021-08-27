@@ -17,21 +17,26 @@ function generateToken(params = {}) {
 
 router.post('/login', async(req, res) => {
 
-    const { email, password } = req.body
+    try {
+        const { email, password } = req.body
 
-    const user = await User.findOne({
-        email
-    }).select('+password')
+        const user = await User.findOne({
+            email
+        }).select('+password')
 
-    if (!user)
-        return res.status(400).send({ error: "Usuário não encontrado." })
+        if (!user)
+            return res.status(400).send({ error: "Usuário não encontrado." })
 
-    if (!await bcrypt.compare(password, user.password))
-        return res.status(403).send({ error: "email ou senha invalidos" })
+        if (!await bcrypt.compare(password, user.password))
+            return res.status(403).send({ error: "email ou senha invalidos" })
 
-    user.password = undefined
+        user.password = undefined
 
-    res.json({ message: `Bem vindo de volta, ${user.name}`, user, token: generateToken({ id: user.id }) })
+        res.json({ message: `Bem vindo de volta, ${user.name}`, user, token: generateToken({ id: user.id }) })
+
+    } catch (err) {
+        console.log(err);
+    }
 
 });
 
