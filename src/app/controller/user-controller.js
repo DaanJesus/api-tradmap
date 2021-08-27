@@ -32,7 +32,7 @@ router.post('/login', async(req, res) => {
 
         user.password = undefined
 
-        res.json({ message: `Bem vindo de volta, ${user.name}`, user, token: generateToken({ id: user.id }) })
+        res.json({ message: `Bem vindo de volta, ${user.name}`, user, token: generateToken({ id: user._id }) })
 
     } catch (err) {
         console.log(err);
@@ -57,7 +57,7 @@ router.post('/register', async(req, res) => {
 
         user.password = undefined
 
-        res.json({ message: 'Usuario cadastrado com sucesso.', token: generateToken({ id: user.id }) })
+        res.json({ message: 'Usuario cadastrado com sucesso.', token: generateToken({ id: user._id }) })
 
     } catch (err) {
         console.log(err);
@@ -96,4 +96,4 @@ router.put('/update-user/:id_user', async(req, res) => {
 
 });
 
-module.exports = app => app.use('/auth/v1', router);
+module.exports = app => app.use('/trade/v1', router);
