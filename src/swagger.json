@@ -115,7 +115,7 @@
                 }
             }
         },
-        "/auth/login": {
+        "/auth/v1/login": {
             "post": {
                 "summary": "Login de usuário",
                 "tags": [
@@ -159,7 +159,7 @@
                 }
             }
         },
-        "/auth/register": {
+        "/auth/v1/register": {
             "post": {
                 "summary": "Cadastro de usuário",
                 "tags": [
@@ -204,7 +204,7 @@
                 }
             }
         },
-        "/auth/update-user/{id_user}": {
+        "/auth/v1/update-user/{id_user}": {
             "put": {
                 "summary": "Atualização de usuário",
                 "tags": [
