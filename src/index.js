@@ -41,7 +41,6 @@ app.get('/', async(req, res) => {
     res.redirect('/api-docs')
 })
 
-require('./app/controller/trad-controller')(app);
-require('./app/controller/user-controller')(app);
+require('./app/controller/index')(app);
 
 app.listen(process.env.PORT || 8080);
