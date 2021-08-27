@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: __dirname + '/.env' });
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -13,14 +13,17 @@ let host = `localhost:${SERVER_PORT}`;
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
-mongoose.connect("mongodb://localhost:27017/tradMap?readPreference=primary&authSource=tradMap&appname=MongoDB%20Compass&ssl=false", {
-    useUnifiedTopology: true
+mongoose.connect(process.env.URL_MONGO, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
 }).then(
     () => {
         console.log("Success connect to: tradeMapDataBase", host);
     },
     err => {
-        console.log("Error connect to: forSaleDatabase" + err);
+        console.log("Error connect to: tradeMapDatabase" + err);
     }
 );
 
@@ -34,7 +37,7 @@ app.use(morgan("dev"));
 
 app.use(express.json());
 
-app.get('/', async (req, res) => {
+app.get('/', async(req, res) => {
     res.redirect('/api-docs')
 })
 
