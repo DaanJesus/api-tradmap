@@ -3,7 +3,11 @@ const express = require('express');
 
 //modules
 const Stocks = require('../model/stocks.js');
+const authMiddleware = require('../middleware/auth')
+
 const router = express.Router();
+
+router.use(authMiddleware)
 
 router.get('/lista', async(req, res) => {
 

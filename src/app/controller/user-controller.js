@@ -4,26 +4,34 @@ const express = require('express');
 //modules
 const User = require('../model/user.js');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
+
+const authConfig = require('../config/auth.json')
+
+function generateToken(params = {}) {
+    return jwt.sign(params, authConfig.secret, {
+        expiresIn: 86400
+    })
+}
 
 router.post('/login', async(req, res) => {
 
-    try {
+    const { email, password } = req.body
 
-        const { name, password } = req.params
+    const user = await User.findOne({
+        email
+    }).select('+password')
 
-        const user = await User.findOne({
-            name: name,
-            password: password
-        })
+    if (!user)
+        return res.status(400).send({ error: "Usuário não encontrado." })
 
-        res.json({ message: `Bem vindo de volta, ${user.name}` })
+    if (!await bcrypt.compare(password, user.password))
+        return res.status(403).send({ error: "email ou senha invalidos" })
 
-    } catch (err) {
-        console.log(err);
-        return res.status(400).send({
-            error: 'Usuário não encontrado.'
-        });
-    }
+    user.password = undefined
+
+    res.json({ message: `Bem vindo de volta, ${user.name}`, user, token: generateToken({ id: user.id }) })
 
 });
 
@@ -44,7 +52,7 @@ router.post('/register', async(req, res) => {
 
         user.password = undefined
 
-        res.json({ message: 'Usuario cadastrado com sucesso.' })
+        res.json({ message: 'Usuario cadastrado com sucesso.', token: generateToken({ id: user.id }) })
 
     } catch (err) {
         console.log(err);
@@ -83,4 +91,4 @@ router.put('/update-user/:id_user', async(req, res) => {
 
 });
 
-module.exports = app => app.use('/trade/v1', router);
+module.exports = app => app.use('/auth/v1', router);
