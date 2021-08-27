@@ -54,11 +54,11 @@ router.post('/register', async(req, res) => {
 
         res.json({ message: 'Usuario cadastrado com sucesso.', token: generateToken({ id: user.id }) })
 
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+        console.log(error);
         return res.status(400).send({
-            error: 'Erro ao se cadastrar',
-            err
+            err: 'Erro ao se cadastrar',
+            error
         });
     }
 
