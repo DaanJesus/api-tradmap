@@ -13,7 +13,7 @@ let host = `localhost:${SERVER_PORT}`;
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
-mongoose.connect(process.env.URL_MONGO, {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
