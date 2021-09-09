@@ -15,7 +15,7 @@ router.get('/lista', async(req, res) => {
 
         const stocks = await Stocks.find()
 
-        res.json(stocks)
+        res.status(200).send(stocks)
 
     } catch (err) {
         console.log(err);
@@ -68,6 +68,27 @@ router.put('/set-favorite/:id_trade', async(req, res) => {
         console.log(err);
         return res.status(400).send({
             error: 'Erro ao finalizar pedido'
+        });
+    }
+
+});
+
+router.get('/stock/:name', async(req, res) => {
+
+    try {
+
+        const { name } = req.params
+
+        const stocks = await Stocks.find({
+            stock: name
+        })
+
+        res.json(stocks)
+
+    } catch (err) {
+        console.log(err);
+        return res.status(400).send({
+            error: 'Erro ao buscar stock'
         });
     }
 

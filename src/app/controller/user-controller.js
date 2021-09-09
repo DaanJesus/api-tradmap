@@ -32,7 +32,7 @@ router.post('/login', async(req, res) => {
 
         user.password = undefined
 
-        res.json({ message: `Bem vindo de volta, ${user.name}`, user, token: generateToken({ id: user._id }) })
+        res.json({ message: `Bem vindo de volta, ${user.name}.`, user, token: generateToken({ id: user._id }) })
 
     } catch (err) {
         console.log(err);
